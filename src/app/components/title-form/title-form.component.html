@@ -1,0 +1,6 @@
+<form [formGroup]="form" (ngSubmit)="save()" novalidate>
+  <label for="title">Title:</label>
+  <input pInputText id="title" name="title" formControlName="title" />
+
+  <button type="submit" [disabled]="form.invalid">Save</button>
+</form>
