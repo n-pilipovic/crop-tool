@@ -1,21 +1,14 @@
 
-.app-left-part {
-  display: inline-block;
-  width: 80%;
-  height: 100%;
-
-  .app-image-holder {
-    height: 430px;
-    width: 960px;
-  }
+.app-image-holder {
+  height: 430px;
+  width: 960px;
 }
 
-.app-right-part {
-  display: inline-block;
-  height: 100%;
-  width: 20%;
+.app-box {
+  border: 1px solid #000;
+  margin-bottom: 20px;
+}
 
-  .app-list {
-    list-style: unset;
-  }
+.app-gutter-bottom {
+  margin-bottom: 15px;
 }

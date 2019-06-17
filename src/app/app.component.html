@@ -1,20 +1,49 @@
+<div class="ui-g">
+  <div class="ui-g-9">
 
-<div class="app-left-part">
-  <canvas
-    #canvasElement
-    class="app-image-holder"
-    (mousedown)="startRectangle($event)"
-    (mousemove)="drawRectangle($event)"
-    (mouseup)="cropImage($event)"
-  >
-  </canvas>
-</div>
-<div class="app-right-part">
-  <ul class="app-list">
-    <li *ngFor="let item of images">
-      {{ item.title }}
-    </li>
-  </ul>
-  <button pButton class="ui-button ui-button-info" (click)="saveImages()">Save</button>
-  <img #cropResult src="{{ imageCropSrc }}"/>
+    <canvas
+      #canvasElement
+      class="app-image-holder"
+      (mousedown)="startRectangle($event)"
+      (mousemove)="drawRectangle($event)"
+      (mouseup)="cropImage($event)"
+    >
+    </canvas>
+
+<!--    <p-fileUpload-->
+<!--      name="myfile[]"-->
+<!--      accept="image/*"-->
+<!--      (onSelect)="pickImage($event)"-->
+<!--    >-->
+<!--      <ng-template let-file pTemplate="file">-->
+<!--        <div>-->
+
+<!--        </div>-->
+<!--      </ng-template>-->
+<!--    </p-fileUpload>-->
+  </div>
+  <div class="ui-g-3">
+    <div class="ui-g ui-g-nopad">
+      <div class="ui-g-12 app-box"
+        *ngIf="imageCropSrc"
+      >
+        <div>Last selected peace of image:</div>
+        <img #cropResult src="{{ imageCropSrc }}"/>
+      </div>
+      <div class="ui-g-12 app-box">
+        <div>Data to send to API:</div>
+        <button pButton type="button" class="ui-button-success app-gutter-bottom" icon="pi pi-check" (click)="saveImages()" label="Save"></button>
+        <p-listbox
+          *ngIf="images.length > 0"
+          [options]="images"
+          [(ngModel)]="selectedImages"
+          optionLabel="title"
+          multiple="true"
+          checkbox="checkbox"
+          [showToggleAll]="false"
+        >
+        </p-listbox>
+      </div>
+    </div>
+  </div>
 </div>

@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TitleFormComponent } from './components/title-form/title-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule, DialogService, InputTextModule } from 'primeng/primeng';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule, DialogService, FileUploadModule, InputTextModule, ListboxModule } from 'primeng/primeng';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './services/data.service';
@@ -26,7 +26,10 @@ import { DataService } from './services/data.service';
     AppRoutingModule,
     DynamicDialogModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    ListboxModule,
+    FormsModule,
+    FileUploadModule
   ],
   providers: [DialogService, DataService],
   entryComponents: [TitleFormComponent],

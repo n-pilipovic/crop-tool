@@ -17,26 +17,28 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('cropResult', { static: true }) cropResult: ElementRef<HTMLImageElement>;
 
   public images: Array<ImageModel> = [];
+  public selectedImages: Array<ImageModel> = [];
+
   public imageCropSrc: string;
 
   private canvas: any;
+
+
   private context: CanvasRenderingContext2D;
-
-
   private canvasX: number;
+
   private canvasY: number;
-
   private lastMouseX: number;
+
   private lastMouseY: number;
-
   private mouseX: number;
-  private mouseY: number;
 
+  private mouseY: number;
   private canvasWidth: number;
+
   private canvasHeight: number;
 
   private mouseDown: boolean;
-
   private sub: Subscription = new Subscription();
 
   constructor(
@@ -74,6 +76,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  // pickImage(event: any): void {
+  //
+  // }
+
   startRectangle(event: MouseEvent): void {
     this.lastMouseX = event.clientX - this.canvasX;
     this.lastMouseY = event.clientY - this.canvasY;
@@ -97,7 +103,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mouseDown = false;
     const ref = this.dialogService.open(TitleFormComponent, {
       header: 'Name selected image part',
-      width: '70%',
       contentStyle: {'max-height': '350px', overflow: 'auto'}
     });
 
@@ -107,7 +112,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
         // TODO: Crop the image and add it to list
         this.context.strokeRect(this.lastMouseX, this.lastMouseY, this.canvasWidth, this.canvasHeight);
-        this.images.push(image);
+
+        // this.selectedImages.push(image);
+        this.images = [...this.images, image];
+        this.selectedImages = [...this.selectedImages, image];
       } else {
         this.resetPositions();
       }
@@ -118,7 +126,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   saveImages(): void {
-    this.dataService.saveImages(this.images).then(
+    console.log(this.selectedImages);
+    this.dataService.saveImages(this.selectedImages).then(
       (resp) => {
         console.log(resp);
       }, err => {
